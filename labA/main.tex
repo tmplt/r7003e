@@ -1,0 +1,184 @@
+\documentclass[11pt]{article} % ~~~~~~~~~~~~~~~~~~~~~~~ %
+%														%
+\input{./Scripts/packages}								%
+\input{./Scripts/ridefinitions}							%
+\input{./Scripts/figuresgraphicalsettings}				%
+\input{./Scripts/tablesgraphicalsettings}				%
+\input{./Scripts/newcommands}							%
+\input{./Scripts/colors}								%
+%														%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+\usepackage{mathtools}
+
+\title{\Huge R7003E 2017 LP2 \\ Lab A report \\ Group 3}
+\date{\today}
+\author{                        % In alphabetical order, family name first
+  Andersson Tommy \\
+  Graden Samuel \\
+  Sonesten Viktor
+}
+
+
+\begin{document}
+\maketitle
+
+\begin{instructions}
+	%
+	For this lab report there is no size limit on your report, but try to be concise. As for the check-list, put a \checkmark when you have done the indicated things. Before submitting the report you mush have \checkmark-marked every row. Delete also these instructions and all the footnotes before submitting.
+	%
+\end{instructions}
+
+\section*{Check-list}
+
+\begin{center}
+	\rowcolors{1}{black!05!white}{}
+	\begin{tabular}{|m{0.8\columnwidth}>{\centering \arraybackslash}m{0.1\columnwidth}|}
+		\hline
+		the fonts in the figures are the same fonts in the rest of the text\footnote{Suggestion: if you use Matlab then take a look at \texttt{http://staff.www.ltu.se/{\textasciitilde}damvar/matlab.html}. If you instead want to do things seriously in \LaTeX\ then consider using the package \texttt{pgfplots}.} & \\
+		the captions of the figures are self-readable and terminate with a dot & \\
+		the figures are color-blind-people-friendly and do not have useless backgrounds & \\
+		colors are used to convey information\footnote{And not to make figures ``more colored''. E.g., red should be used to indicate something ``wrong'' or ``important'', green something ``correct'', etc.} & \\
+		all the figures that are not photos are in vectorial format & \\
+		the figures have meaningful legends that allow to understand what is what & \\
+		all the acronyms are defined properly\footnote{Suggestion: use the package \texttt{acronym}.} & \\
+		there are no spelling errors & \\
+		what needs to be referenced is referenced & \\
+		the parentheses in the various equations are as big as needed & \\
+		the fonts used in the equations are sufficiently big to be readable comfortably & \\
+		\hline
+	\end{tabular}
+\end{center}
+
+
+\begin{acronym}[TDMA]
+	\acro{EOM}	[EOM]	{Equations of Motion}
+	\acro{DC}	[DC]	{Direct Current}
+	\acro{SS}	[SS]	{State-Space}
+	\acro{PID}	[PID]	{Proportional Integrative Derivative}
+	\acro{LQR}	[LQR]	{Linear-Quadratic Regulator}
+	\acro{emf}	[emf]	{electromotive force}
+\end{acronym}
+% basic usage: \ac{EOM} \acf{EOM} \acl{EOM}
+
+\subsection*{Reporting of Task 3.1.5}
+We derived the following \ac{EOM} for the wheel and body:
+
+\begin{equation}\label{eq:system-init}
+  \begin{cases}
+    \ddot{\theta}_b =
+    \frac{1}{I_b}\left[
+      T_f
+      - T_m
+      + F_y l_b sin(\theta_b)
+      - F_x l_b cos(\theta_b)
+    \right], \\[1em]
+    \ddot{x}_w = \frac{F_t - F_x}{m_w}, \\
+  \end{cases}
+\end{equation}
+where
+\begin{equation}\label{eq:F_xyt}
+  \begin{cases}
+    F_x = m_b\left(
+      \ddot{x}_w
+      + \ddot{\theta}_b l_b cos(\theta_b)
+      - \dot{\theta}^2_b l_b sin(\theta_b)
+    \right), \\[1em]
+    F_y = m_b g+ m_b \ddot{y}_w = m_b g - m_b\left(
+      \ddot{\theta}_b l_b sin(\theta_b)
+      + \dot{\theta}^2_b l_b cos(\theta_b)
+    \right), \\[1em]
+    F_t = \frac{T_m - T_f - I_w \ddot{\theta}_w}{l_w} = \frac{T_m - T_f}{l_w} - I_w \ddot{x}_w.
+  \end{cases}
+\end{equation}
+We do not want our system equation to depend on $F_x, F_y, F_t$.
+Additionally,
+\begin{equation}\label{eq:T_f}
+T_f = b_f\left(
+\dot{\theta}_w - \dot{\theta}_b
+\right) =
+b_f\left(
+\frac{\dot{x}_w}{l_w} - \dot{\theta}_b
+\right).
+\end{equation}
+We substitute Eq.~\eqref{eq:F_xyt}--\eqref{eq:T_f} into Eq.~\eqref{eq:system-init} and simplify:
+\begin{equation}\label{eq:system}
+  \begin{cases}
+    \ddot{x}_w = \frac{1}{m_w + I_w + m_b}\left[
+      \frac{T_m - T_f}{l_w}
+      + m_b l_b \left(\dot{\theta}^2_b sin(\theta_b)
+        - \ddot{\theta}_b cos(\theta_b)
+      \right)
+    \right], \\[1em]
+    \ddot{\theta}_w = \frac{1}{I_b + m_b l_b^2}\left[
+      b_f\left(\frac{\dot{x}_w}{l_w}
+        - \dot{\theta}_b\right)
+      - T_m
+      + m_g l_b sin(\theta_b)
+      - \ddot{x}_w m_b l_b cos(\theta_b)
+    \right].
+  \end{cases}
+\end{equation}
+
+We then find the \ac{EOM} for the motor by applying Newton's laws of rotational motion:
+\begin{align}
+  J_m \ddot{\theta}_m &= K_e i_m = T_m, \quad \text{assuming negligible viscous coefficient;}\nonumber \\
+  \Rightarrow i_m &= \frac{J_m \ddot{\theta}_m}{K_t}\label{eq:motor/newton}
+\end{align}
+and analyse an equivalent circuit which models the motor:
+\begin{equation}\label{eq:motor/circuit}
+R_m i_m = v_m - K_e \dot{\theta_m}, \quad \text{assuming negligible inductance.}
+\end{equation}
+Eq.~\eqref{eq:motor/newton} in Eq.~\eqref{eq:motor/circuit} and rearrangement gives us
+\begin{equation}\label{eq:motor/circuit2}
+  J_m \ddot{\theta}_m
+  + \frac{K_t K_e}{R_m} \dot{\theta}_m
+  = \frac{K_t}{R_m}.
+\end{equation}
+But $J_m \ddot{\theta}_m = T_m$, and $\dot{\theta}_m = \frac{\dot{x}_w}{l_w} - \dot{\theta}_b$ in Eq.~\eqref{eq:motor/circuit2} gives us
+\begin{equation}\label{eq:motor}
+  T_m = \frac{K_t}{R_m}\left(
+    v_m
+    - \frac{K_e \dot{x}_w}{l_w}
+    + \dot{\theta}_b
+  \right).
+\end{equation}
+Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symbolic form:
+\begin{equation}
+  \begin{cases}
+    \begin{aligned}[b]
+      \ddot{x}_w =
+      \frac{1}{m_w + I_w + m_b}\bigg[
+      \frac{K_t}{R_m l_w}\left(
+        v_m
+        - \frac{K_e \dot{x}_w}{l_w}
+        + \dot{\theta}_b
+      \right)
+      + \frac{b_f \dot{\theta}_b}{l_w}
+      - b_f \dot{x}_w\\
+      + m_b l_b \left(
+        \dot{\theta}^2_b sin(\theta_b)
+        - \ddot{\theta}_b cos(\theta_b)
+      \right)
+      \bigg],
+    \end{aligned}\\[1em]
+  \begin{aligned}[b]
+    \ddot{\theta}_w =
+    \frac{1}{I_b + m_b l_b^2}\bigg[
+      b_f\left(
+        \frac{\dot{x}_w}{l_w}
+        - \dot{\theta}_b
+      \right)
+      - \frac{K_t}{R_m l_w}\left(
+        v_m
+        - \frac{K_e \dot{x}_w}{l_w}
+        + \dot{\theta}_b
+      \right)\\
+      + m_g l_b sin(\theta_b)
+      - \ddot{x}_w m_b l_b cos(\theta_b)
+    \bigg].
+    \end{aligned}
+  \end{cases}
+\end{equation}
+
+\end{document}
