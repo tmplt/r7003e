@@ -180,5 +180,38 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
     \end{aligned}
   \end{cases}
 \end{equation}
+Linearization of $\theta_b = 0$ because assuming small angles, this also means that $\theta^2 \approx 0 $. 
+\begin{equation}
+    \begin{cases}
+        \begin{aligned}[b]
+          \Delta\ddot{x}_w =
+          \frac{1}{m_w + I_w + m_b}\bigg[
+          \frac{K_t}{R_m l_w}\left(
+            v_m
+            - \frac{K_e \dot{x}_w}{l_w}
+            + \dot{\theta}_b
+          \right)
+          + \frac{b_f \dot{\theta}_b}{l_w}
+          - b_f \dot{x}_w
+          \bigg],
+        \end{aligned}\\[1em]
+    \begin{aligned}[b]
+        \Delta\ddot{\theta}_w =
+        \frac{1}{I_b + m_b l_b^2}\bigg[
+          b_f\left(
+            \frac{\dot{x}_w}{l_w}
+            - \dot{\theta}_b
+          \right)
+          - \frac{K_t}{R_m l_w}\left(
+            v_m
+            - \frac{K_e \dot{x}_w}{l_w}
+            + \dot{\theta}_b
+          \right)\\
+          + m_b l_b (\theta_b
+          - \ddot{x}_w)
+        \bigg].
+    \end{aligned}
+  \end{cases}
+\end{equation}
 
 \end{document}
