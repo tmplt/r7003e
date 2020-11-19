@@ -66,14 +66,14 @@ We derived the following \ac{EOM} for the wheel and body:
 
 \begin{equation}\label{eq:system-init}
   \begin{cases}
+    \ddot{x}_w = \frac{F_t - F_x}{m_w}, \\[1em]
     \ddot{\theta}_b =
     \frac{1}{I_b}\left[
       T_f
       - T_m
       + F_y l_b sin(\theta_b)
       - F_x l_b cos(\theta_b)
-    \right], \\[1em]
-    \ddot{x}_w = \frac{F_t - F_x}{m_w}, \\
+    \right],
   \end{cases}
 \end{equation}
 where
@@ -110,7 +110,7 @@ We substitute Eq.~\eqref{eq:F_xyt}--\eqref{eq:T_f} into Eq.~\eqref{eq:system-ini
         - \ddot{\theta}_b cos(\theta_b)
       \right)
     \right], \\[1em]
-    \ddot{\theta}_w = \frac{1}{I_b + m_b l_b^2}\left[
+    \ddot{\theta}_b = \frac{1}{I_b + m_b l_b^2}\left[
       b_f\left(\frac{\dot{x}_w}{l_w}
         - \dot{\theta}_b\right)
       - T_m
@@ -144,7 +144,7 @@ But $J_m \ddot{\theta}_m = T_m$, and $\dot{\theta}_m = \frac{\dot{x}_w}{l_w} - \
   \right).
 \end{equation}
 Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symbolic form:
-\begin{equation}
+\begin{equation}\label{eq:system-nonlinear}
   \begin{cases}
     \begin{aligned}[b]
       \ddot{x}_w =
@@ -163,7 +163,7 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
       \bigg],
     \end{aligned}\\[1em]
   \begin{aligned}[b]
-    \ddot{\theta}_w =
+    \ddot{\theta}_b =
     \frac{1}{I_b + m_b l_b^2}\bigg[
       b_f\left(
         \frac{\dot{x}_w}{l_w}
@@ -180,38 +180,64 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
     \end{aligned}
   \end{cases}
 \end{equation}
-Linearization of $\theta_b = 0$ because assuming small angles, this also means that $\theta^2 \approx 0 $. 
-\begin{equation}
+
+\subsection*{Reporting of Task 3.2.1}
+\begin{enumerate}
+\item % Say which linearization point you chose;
+  We choose the linearization point of $\theta_b = 0$. Thus
+  \begin{equation}\label{eq:theta=0}
+    \theta_b \approx \dot{\theta}_b \approx \ddot{\theta}_b \approx 0.
+  \end{equation}
+\item % Say why you chose that specific point;
+  We chose $\theta_b = 0$ because it is an equalibrium point and because we assume our system will only be subject to small angles.
+\item % Write the linearized EOM
+  With small-angle approximation, we redefine our non-linear terms:
+  \begin{equation}\label{eq:nonlinear-redef}
     \begin{cases}
-        \begin{aligned}[b]
-          \Delta\ddot{x}_w =
-          \frac{1}{m_w + I_w + m_b}\bigg[
+      \begin{aligned}
+        \sin(\theta_b) &\triangleq \theta_b, \\
+        \ddot{x}_w \cos(\theta_b) &\triangleq \ddot{x}_w, \\
+        \ddot{\theta}_b \cos(\theta_b) &\triangleq 0, \\
+        \dot{\theta}_b^2 \sin(\theta_b) &\triangleq 0.
+      \end{aligned}
+    \end{cases}
+  \end{equation}
+  Our linearized \ac{EOM}: Eqs.~\eqref{eq:theta=0}, \eqref{eq:nonlinear-redef} and $b_f = 0$ (assumption from task description)
+  in Eq.~\eqref{eq:system-nonlinear} simplifed thus becomes
+  \begin{equation}
+    \begin{cases}
+      \begin{aligned}[b]
+        {x}_w \triangleq
+        \frac{1}{m_w + I_w + m_b}\left[
           \frac{K_t}{R_m l_w}\left(
-            v_m
-            - \frac{K_e \dot{x}_w}{l_w}
-            + \dot{\theta}_b
+            v_m - \frac{K_e \dot{x}_w}{l_w}
           \right)
-          + \frac{b_f \dot{\theta}_b}{l_w}
-          - b_f \dot{x}_w
-          \bigg],
-        \end{aligned}\\[1em]
-    \begin{aligned}[b]
-        \Delta\ddot{\theta}_w =
+        \right]
+        =
+        \frac{
+          \frac{v_m}{l_w}
+          - K_e \dot{x}_w
+        }
+        {
+          R_m(
+          m_w
+          + I_w
+          + m_b
+          )
+        },
+      \end{aligned}\\[1em]
+      \begin{aligned}[b]
+        \ddot{\theta}_b \triangleq
         \frac{1}{I_b + m_b l_b^2}\bigg[
-          b_f\left(
-            \frac{\dot{x}_w}{l_w}
-            - \dot{\theta}_b
-          \right)
-          - \frac{K_t}{R_m l_w}\left(
-            v_m
-            - \frac{K_e \dot{x}_w}{l_w}
-            + \dot{\theta}_b
-          \right)\\
-          + m_b l_b (\theta_b
-          - \ddot{x}_w)
+        \frac{K_t}{R_m l_w}\left(
+          \frac{K_e \dot{x}_w}{l_w}
+          - v_m
+        \right)
+        - \ddot{x}_w m_b l_b
         \bigg].
-    \end{aligned}
-  \end{cases}
-\end{equation}
+      \end{aligned}
+    \end{cases}
+  \end{equation}
+\end{enumerate}
 
 \end{document}
