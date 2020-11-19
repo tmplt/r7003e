@@ -202,7 +202,7 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
       \end{aligned}
     \end{cases}
   \end{equation}
-  Our linearized \ac{EOM}: Eqs.~\eqref{eq:theta=0}, \eqref{eq:nonlinear-redef} and $b_f = 0$ (assumption from task description)
+  Our linearized \ac{EOM}: Eqs.~\eqref{eq:theta=0}, \eqref{eq:nonlinear-redef}
   in Eq.~\eqref{eq:system-nonlinear} simplifed thus becomes
   \begin{equation}
     \begin{cases}
@@ -212,26 +212,16 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
           \frac{K_t}{R_m l_w}\left(
             v_m - \frac{K_e \dot{x}_w}{l_w}
           \right)
-        \right]
-        =
-        \frac{
-          \frac{v_m}{l_w}
-          - K_e \dot{x}_w
-        }
-        {
-          R_m(
-          m_w
-          + I_w
-          + m_b
-          )
-        },
+          - b_f \dot{x}_w
+        \right],
       \end{aligned}\\[1em]
       \begin{aligned}[b]
         \ddot{\theta}_b \triangleq
         \frac{1}{I_b + m_b l_b^2}\bigg[
-        \frac{K_t}{R_m l_w}\left(
-          \frac{K_e \dot{x}_w}{l_w}
-          - v_m
+        \frac{b_f \dot{x}_w}{l_w}
+        - \frac{K_t}{R_m l_w}\left(
+          v_m
+          - \frac{K_e \dot{x}_w}{l_w}
         \right)
         - \ddot{x}_w m_b l_b
         \bigg].
