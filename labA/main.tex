@@ -71,8 +71,8 @@ We derived the following \ac{EOM} for the wheel and body:
     \frac{1}{I_b}\left[
       T_f
       - T_m
-      + F_y l_b sin(\theta_b)
-      - F_x l_b cos(\theta_b)
+      + F_y l_b \sin(\theta_b)
+      - F_x l_b \cos(\theta_b)
     \right],
   \end{cases}
 \end{equation}
@@ -81,12 +81,12 @@ where
   \begin{cases}
     F_x = m_b\left(
       \ddot{x}_w
-      + \ddot{\theta}_b l_b cos(\theta_b)
-      - \dot{\theta}^2_b l_b sin(\theta_b)
+      + \ddot{\theta}_b l_b \cos(\theta_b)
+      - \dot{\theta}^2_b l_b \sin(\theta_b)
     \right), \\[1em]
     F_y = m_b g+ m_b \ddot{y}_w = m_b g - m_b\left(
-      \ddot{\theta}_b l_b sin(\theta_b)
-      + \dot{\theta}^2_b l_b cos(\theta_b)
+      \ddot{\theta}_b l_b \sin(\theta_b)
+      + \dot{\theta}^2_b l_b \cos(\theta_b)
     \right), \\[1em]
     F_t = \frac{T_m - T_f - I_w \ddot{\theta}_w}{l_w} = \frac{T_m - T_f}{l_w} - I_w \ddot{x}_w.
   \end{cases}
@@ -106,16 +106,16 @@ We substitute Eq.~\eqref{eq:F_xyt}--\eqref{eq:T_f} into Eq.~\eqref{eq:system-ini
   \begin{cases}
     \ddot{x}_w = \frac{1}{m_w + I_w + m_b}\left[
       \frac{T_m - T_f}{l_w}
-      + m_b l_b \left(\dot{\theta}^2_b sin(\theta_b)
-        - \ddot{\theta}_b cos(\theta_b)
+      + m_b l_b \left(\dot{\theta}^2_b \sin(\theta_b)
+        - \ddot{\theta}_b \cos(\theta_b)
       \right)
     \right], \\[1em]
     \ddot{\theta}_b = \frac{1}{I_b + m_b l_b^2}\left[
       b_f\left(\frac{\dot{x}_w}{l_w}
         - \dot{\theta}_b\right)
       - T_m
-      + m_b g l_b sin(\theta_b)
-      - \ddot{x}_w m_b l_b cos(\theta_b)
+      + m_b g l_b \sin(\theta_b)
+      - \ddot{x}_w m_b l_b \cos(\theta_b)
     \right].
   \end{cases}
 \end{equation}
@@ -157,8 +157,8 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
       + \frac{b_f \dot{\theta}_b}{l_w}
       - b_f \dot{x}_w\\
       + m_b l_b \left(
-        \dot{\theta}^2_b sin(\theta_b)
-        - \ddot{\theta}_b cos(\theta_b)
+        \dot{\theta}^2_b \sin(\theta_b)
+        - \ddot{\theta}_b \cos(\theta_b)
       \right)
       \bigg],
     \end{aligned}\\[1em]
@@ -174,8 +174,8 @@ Eq.~\eqref{eq:motor} in Eq.~\eqref{eq:system} gives us our full \ac{EOM} in symb
         - \frac{K_e \dot{x}_w}{l_w}
         + \dot{\theta}_b
       \right)\\
-      + m_b g l_b sin(\theta_b)
-      - \ddot{x}_w m_b l_b cos(\theta_b)
+      + m_b g l_b \sin(\theta_b)
+      - \ddot{x}_w m_b l_b \cos(\theta_b)
     \bigg].
     \end{aligned}
   \end{cases}
