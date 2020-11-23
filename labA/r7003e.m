@@ -1,3 +1,5 @@
+% -*-Octave-*-
+
 g = 9.8;
 b_f = 0;
 m_b = 0.381;
@@ -76,7 +78,7 @@ poles
 
 [zeros, gain] = zero(SYS);
 
-%[zeross, gaintt] = rlocus(SYS) 
+%[zeross, gaintt] = rlocus(SYS)
 
 zeros
 gain
