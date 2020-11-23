@@ -69,11 +69,26 @@ I = eye(4);
 
 SYS = ss(A,B,C,D)
 
-syms K  [1 4]
+syms s
 
-BK = B*K
+SI = [1*s, 0, 0, 0;
+      0, 1*s, 0, 0;
+      0, 0, 1*s, 0;
+      0, 0, 0, 1*s];
 
-(A-BK)
+SI
+
+syms K [1 4];
+
+K
+
+koll_koll = det(SI-(A-B*K));
+
+koll_koll
+
+temp = (5791614692042133/281474976710656)
+
+K_1 = 20.57594873876*s^2
 
 poly_A = poly(A)
 %kar_A = det(I-A)
