@@ -327,4 +327,37 @@ Our transfer function is the following:
 \begin{equation}
   G(s) = -90\frac{s}{(s + 475)(s + 5.65)(s - 5.72)}
 \end{equation}
+
+\subsection*{Reporting of Task 3.5.1}
+\begin{enumerate}
+\item % Describe your choice for the poles, and what you want to achieve in terms of impulse response for the closed loop system;
+  We choose our poles to be located in $s = -500, -10, -5$.
+  Our poles are all located on the left side of the complex field because we want a stable system.
+  Additionally, our poles as real-valued because we do not want an oscillatory system response.
+\item % Write the values of the parameters of the PID
+  $$
+  K_p = -84.25, K_i = -199.253, K_d = -11
+  $$
+\item % Write the resulting closed-loop function in its numerical form
+  $$
+  \frac{\Theta_b(s)}{V(s)} = \frac{G(s)H(s)}{1 + G(s)H(s)}
+  $$
+  where
+  % NOTE: using this equation and factoring out the coefficients of s,
+  % and equating them to the wanted poles we find our values of K.
+  \begin{align*}
+    G(s)H(s)
+    &= \left(
+    K_p + \frac{K_i}{s} + sK_d
+    \right)
+    \frac{-90s}{(s + 475) (s + 5.7) (s - 5.7)} \\
+    &=
+    \frac{
+    90s\left(84.25 + \frac{199.253}{s} + 11s\right)
+    }{
+    (s + 475) (s + 5.7) (s - 5.7)
+    }
+  \end{align*}
+\end{enumerate}
+
 \end{document}
