@@ -293,7 +293,7 @@ We substitute Eqs.~\eqref{eq:F_xyt}--\eqref{eq:T_f}, \eqref{eq:motor} into Eq.~\
   \end{equation*}
 \item % Write the matrices A, B, C, and D in (12) parametric numeric form (for this purpose use Table 4 on page 64).
   Our system in numeric system-state form is the following:
-  \begin{equation*}
+  \begin{equation}\label{eq:numeric-ss}
     \begin{bmatrix}
       0.0091 & 0.0009 \\
       0.0427 & 0.0109
@@ -319,7 +319,7 @@ We substitute Eqs.~\eqref{eq:F_xyt}--\eqref{eq:T_f}, \eqref{eq:motor} into Eq.~\
       -0.1068
     \end{bmatrix}
     u
-  \end{equation*}
+  \end{equation}
 \end{enumerate}
 
 \subsection*{Reporting of Task 3.4.1}
@@ -358,6 +358,98 @@ Our transfer function is the following:
     (s + 475) (s + 5.7) (s - 5.7)
     }
   \end{align*}
+\end{enumerate}
+
+\subsection*{Reporting of Task 3.6.1}
+\begin{enumerate}
+\item % Write the novel EOM in parametric form
+  We redefine
+  $$
+  F_x \triangleq m_b\left(
+    \ddot{x}_w
+    + \ddot{\theta}_b l_b \cos\theta_b
+    - \dot{\theta}^2_b l_b \sin\theta_b
+  \right)
+  - d,
+  $$
+  and derive our novel \ac{EOM}:
+  \begin{equation}\label{eq:system-novel}
+    \begin{cases}
+      \begin{aligned}
+        \ddot{x}_w\left(l_w(m_w + m_b) + \frac{I_w}{l_w}\right) =
+        \left(
+          \frac{K_t K_e}{R_m}
+          + b_f
+        \right)\dot{\theta}_b
+        +
+        \left(
+          \frac{b_f}{l_w}
+          -
+          \frac{K_t K_e}{R_m l_w}
+        \right)\dot{x}_w
+        \\
+        + \frac{K_t}{R_m}v_m
+        - m_b l_b l_w \ddot{\theta}_b \cos\theta_b
+        - m_b l_b l_w \dot{\theta}_b^2 \sin\theta_b
+        + l_w d
+      \end{aligned}\\
+      \begin{aligned}
+        \ddot{\theta}_b\left(I_b + m_b l_b^2\right)
+        =
+        -\left(
+          \frac{b_f}{l_w}
+          +
+          \frac{K_t K_e}{R_m}
+        \right)\dot{\theta}_b
+        + \left(
+          \frac{b_f}{l_w} + \frac{K_t K_e}{R_m l_w}
+        \right)\dot{x}_w
+        \\
+        - \frac{K_t}{R_m}v_m
+        + m_b l_b g \sin\theta_b
+        - m_b l_b \ddot{x}_w
+        + l_b d.
+      \end{aligned}
+    \end{cases}
+  \end{equation}
+\item % Write the novel linearized EOM in state space in numerical form
+  Our linearized state space of the \ac{EOM} in numerical form is Eq.~\eqref{eq:numeric-ss} with an additional system input $d$:
+  \begin{equation*}
+    \begin{aligned}
+      \begin{bmatrix}
+        0.0091 & 0.0009 \\
+        0.0427 & 0.0109
+      \end{bmatrix}
+      \begin{bmatrix}
+        \ddot{x}_w \\
+        \ddot{\theta}_b
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        0 & -2.2584 & 0 & 0.0474 \\
+        0 & 2.2584 & 0.4182 & -0.0474
+      \end{bmatrix}
+      \begin{bmatrix}
+        x_w\\
+        \dot{x}_w\\
+        \theta_b\\
+        \dot{\theta}_b
+      \end{bmatrix}
+      \\
+      +
+      \begin{bmatrix}
+        0.1068 \\
+        -0.1068
+      \end{bmatrix}
+      u
+      +
+      \begin{bmatrix}
+        0.008 \\
+        0.043
+      \end{bmatrix}
+      d
+    \end{aligned}
+  \end{equation*}
 \end{enumerate}
 
 \end{document}
