@@ -62,46 +62,11 @@ D = 0
 % Task 3.4.1: Determine the transfer function to the system
 %
 
-% system = ss(A, B, C, D);
-% [num, den] = ss2tf(system)
+sys = ss(A, B, C, D);
+poles = pole(sys);
+[zeros, gain] = zero(sys);
 
-I = eye(4);
-
-SYS = ss(A,B,C,D)
-
-syms s
-
-SI = [1*s, 0, 0, 0;
-      0, 1*s, 0, 0;
-      0, 0, 1*s, 0;
-      0, 0, 0, 1*s];
-
-SI
-
-syms K [1 4];
-
-K
-
-koll_koll = det(SI-(A-B*K));
-
-koll_koll
-
-temp = (5791614692042133/281474976710656)
-
-K_1 = 20.57594873876*s^2
-
-poly_A = poly(A)
-%kar_A = det(I-A)
-
-pzplot(SYS)
-poles = pole(SYS);
-
-ZER3 = zero(SYS);
-poles
-
-[zeros, gain] = zero(SYS);
-
-%[zeross, gaintt] = rlocus(SYS)
-
-zeros
-gain
+%
+% Task 3.5.1 can we symbolically solve it with MATLAB?
+% Has already been solved on paper, however.
+%
