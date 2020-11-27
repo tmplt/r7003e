@@ -88,3 +88,16 @@ Df = zeros(4, 2);
 
 % model our novel input, d
 Bf = [ 0 0; B(2) l_w; 0 0; B(4) l_b ];
+
+%kar ekv, maybe should use plant instead but can't use bandwidth then
+sys = ss(A, B, C, D);
+
+%Used to calculate the system's bandwidth, read that it should be 2*the 
+%bandwidth
+fb = bandwidth(sys)*2
+
+%Converting to sample time
+time_sample = 1/fb
+
+%Converts the continous function into discrete
+sysd = c2d(plant,time_sample)
