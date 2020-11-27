@@ -93,7 +93,7 @@ Bf = [ 0 0; B(2) l_w; 0 0; B(4) l_b ];
 sys = ss(A, B, C, D);
 
 %Used to calculate the system's bandwidth, read that it should be 2*the 
-%bandwidth
+%bandwidth. According to the Nyqvist Theorem
 fb = bandwidth(sys)*2
 
 %Converting to sample time
