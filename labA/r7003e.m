@@ -77,8 +77,8 @@ Kd = (sum(dp) - den(1)) / k;
 
 % We verify
 controller = pid(Kp, Ki, Kd);
-cs = feedback(plant, controller); % closed-loop system
-[zc, pc, kc] = tf2zp(cs.Numerator{1,1:11}, cs.Denominator{1,1:11});
+system = feedback(plant, controller); % closed-loop system
+[zc, pc, kc] = tf2zp(system.Numerator{1,1:11}, system.Denominator{1,1:11});
 % Compare the above with [ z, p, k ]
 % Visually inspect system response via:
 %impulse(cs)
@@ -89,15 +89,25 @@ Df = zeros(4, 2);
 % model our novel input, d
 Bf = [ 0 0; B(2) l_w; 0 0; B(4) l_b ];
 
-%kar ekv, maybe should use plant instead but can't use bandwidth then
-sys = ss(A, B, C, D);
+%% Task 3.8 Convert the controller to the discrete domain
+% Find the bandwidth of the system.
+sys_bw = bandwidth(1 + controller * plant);
 
-%Used to calculate the system's bandwidth, read that it should be 2*the 
-%bandwidth. According to the Nyqvist Theorem
-fb = bandwidth(sys)*2
+% NOTE: the below assumes the while feedback system as the controller,
+% which is probably incorrect.
+% system = zpk(zc, pc, kc);
+% system = minreal(system);
+% sys_bw = bandwidth(system);
+% In the above, we redeclare our system in zpk-form so that minreal works.
+% minreal cancels the zero/pole at s = 0 that comes from adding system
+% feedback.
 
-%Converting to sample time
-time_sample = 1/fb
+% We find our sampling frequency as according to 8.3.6 in FPE7.
+% See also example 8.1, page 623.
+sampling_freq = sys_bw * 25;
+% We convert to Hz
+sampling_freq = sampling_freq / (2 * pi);
+T = 1 / sampling_freq;
 
-%Converts the continous function into discrete
-sysd = c2d(plant,time_sample)
+% We compute the discrete controller
+systemd = c2d(system, T, 'zoh');
