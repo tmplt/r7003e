@@ -91,7 +91,7 @@ Bf = [ 0 0; B(2) l_w; 0 0; B(4) l_b ];
 
 %% Task 3.8 Convert the controller to the discrete domain
 % Find the bandwidth of the system.
-sys_bw = bandwidth(1 + controller * plant);
+sys_bw = bandwidth((controller*plant) / (1 + controller * plant));
 
 % NOTE: the below assumes the while feedback system as the controller,
 % which is probably incorrect.
@@ -110,4 +110,4 @@ sampling_freq = sampling_freq / (2 * pi);
 T = 1 / sampling_freq;
 
 % We compute the discrete controller
-systemd = c2d(1 + plant * controller, T, 'zoh');
+controllerd = c2d(pid(Kp, Ki, Kd, T), T, 'zoh');
