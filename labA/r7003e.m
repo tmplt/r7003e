@@ -110,4 +110,4 @@ sampling_freq = sampling_freq / (2 * pi);
 T = 1 / sampling_freq;
 
 % We compute the discrete controller
-systemd = c2d(system, T, 'zoh');
+systemd = c2d(1 + plant * controller, T, 'zoh');
