@@ -323,41 +323,45 @@ We substitute Eqs.~\eqref{eq:F_xyt}--\eqref{eq:T_f}, \eqref{eq:motor} into Eq.~\
 \end{enumerate}
 
 \subsection*{Reporting of Task 3.4.1}
-Our transfer function is the following:
-\begin{equation}
-  G(s) = -90\frac{s}{(s + 475)(s + 5.65)(s - 5.72)}
+\begin{enumerate}
+\item % Write the transfer function in the described form
+We find ous transfer function to be
+\begin{equation}\label{eq:tf}
+  G(s) = -90.03\frac{s}{(s + 475)(s + 5.65)(s - 5.72)}
 \end{equation}
+
+\item % Describe any numeric MATLAB problems encountered, if any
+The output of \texttt{ss2zp(A, B, C, D)} yields a zero-vector with the
+values of $10^{-13}\begin{bmatrix} 0 & 0.5684 \end{bmatrix}^T$. We here decide that the non-zero
+value is sufficiently close to zero to be presumed as such. With two
+zeroes and one pole at $s = 0$ we have a pole/zero cancelation that
+simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
+\end{enumerate}
 
 \subsection*{Reporting of Task 3.5.1}
 \begin{enumerate}
 \item % Describe your choice for the poles, and what you want to achieve in terms of impulse response for the closed loop system;
-  We choose our poles to be located in $s = -500, -10, -5$.
-  Our poles are all located on the left side of the complex field because we want a stable system.
+  Two of our system poles were already negative, namely $s = -475,
+  -5.65$, from Eq.~\eqref{eq:tf}. We chose to move our positive, and
+  thus unstable pole from $s = 5.72$ to $s = -70$. We chose that pole
+  because we want our system to quickly respond to a deviation from
+  $\theta_b = 0$. We confirmed the suitability of the pole by
+  inspecting the system response via \texttt{impulse(feedback(plant, controller))}.
   Additionally, our poles as real-valued because we do not want an oscillatory system response.
 \item % Write the values of the parameters of the PID
   $$
-  K_p = -84.25, K_i = -199.253, K_d = -11
+  K_p = -404.3247, K_i = -2.260 \times 10^3, K_d = -0.8411
   $$
 \item % Write the resulting closed-loop function in its numerical form
   $$
-  \frac{\Theta_b(s)}{V(s)} = \frac{G(s)H(s)}{1 + G(s)H(s)}
+  \frac{\Theta_b(s)}{V(s)} =
+  \frac{-90s^2}{
+    s^4
+    + 550.7s^3
+    + 3.634 \times 10^4 s^2
+    + 1.881 \times 10^5 s
+  }
   $$
-  where
-  % NOTE: using this equation and factoring out the coefficients of s,
-  % and equating them to the wanted poles we find our values of K.
-  \begin{align*}
-    G(s)H(s)
-    &= \left(
-    K_p + \frac{K_i}{s} + sK_d
-    \right)
-    \frac{-90s}{(s + 475) (s + 5.7) (s - 5.7)} \\
-    &=
-    \frac{
-    90s\left(84.25 + \frac{199.253}{s} + 11s\right)
-    }{
-    (s + 475) (s + 5.7) (s - 5.7)
-    }
-  \end{align*}
 \end{enumerate}
 
 \subsection*{Reporting of Task 3.6.1}
