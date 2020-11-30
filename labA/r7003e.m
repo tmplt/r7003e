@@ -87,7 +87,8 @@ Cf = eye(4);
 Df = zeros(4, 2);
 
 % model our novel input, d
-Bf = [ 0 0; B(2) l_w; 0 0; B(4) l_b ];
+push = inv(gamma) * [ l_w; l_b ];
+Bf = [ 0 0; B(2) push(1); 0 0; B(4) push(2) ];
 
 %% Task 3.8 Convert the controller to the discrete domain
 % Find the bandwidth of the system.
