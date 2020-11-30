@@ -456,18 +456,44 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   \end{equation*}
 \end{enumerate}
 \subsection*{Reporting of Task 3.8.1}
+\begin{enumerate}
+\item We find the bandwidth of our system via \texttt{gh = plant *
+    controller; bandwidth(gh / (1 + gh))} to be
+  $\omega_b = 69.8340~\text{rad/s} = 11.1144~\text{Hz}$.
+\item We choose our samping time to be
+  $25\omega_b \Rightarrow T = 0.0036~\text{s}$.
+\item Following the recommendations of §8.3.6, we use a scalar value
+  of $25$ so that we may ``[use] discrete equivalents [...] with
+  confidence''.
+\item
+  Our discrete controller, $C(z)$, derived via \texttt{c2d(pid(Kp, Ki,
+    Kd, T), T, ’zoh’)}\footnote{We have no idea what value of
+    \texttt{Tf} we should pass to \texttt{c2d}, but we assume it has
+    some relation to $T$.} is
+  \begin{equation}
+    C(z) =
+    K_p
+    + K_i\frac{T_s}{z - 1}
+    + K_d\left(
+      T_f + \frac{T_s}{z - 1}
+    \right)^{-1}
+    \text{, where}
+    \quad
+    \begin{cases}
+      K_p = -404 \\
+      K_i = -2.26 \times 10^{3} \\
+      K_d = -1.33 \\
+      T_f = 0.00569 \\
+      T_s = T
+    \end{cases}
+  \end{equation}
+\end{enumerate}
 
-\begine{enumerate}
-	\item 
-	The bandwidth of the system is 
-	\item 
-	The chosen sampling time is 1/25 the bandwidth
-	\item
-	We chose the sampling time according to the course book section 8.3.6
-	\item
-	\begin{equation}
-     		C(z) = \frac{z^3 + 1.699 z^2 - 1.936 z + 1.82 \cdot 10^{-9}}{z^3 - 2.065 z^2 + 1.003 z - 9.425 \cdot 10^{-10}}
-	\end{equation}
+\subsection*{Reporting of Task 3.9.1}
+\begin{enumerate}
+\item We find that $\bar{d} = 1.6$ for both the discrete and
+  continuous case. We presume this to be the expected results on the
+  basis that we use $25\omega_b$ as our sampling rate.
 \end{enumerate}
 
 \end{document}
