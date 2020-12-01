@@ -349,10 +349,12 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   inspecting the system response via \texttt{impulse(feedback(plant, controller))}.
   Additionally, our poles as real-valued because we do not want an oscillatory system response.
 \item % Write the values of the parameters of the PID
-  $$
+  Our found PID values are found to be
+  \begin{equation}\label{eq:pid}
   K_p = -404.3247, K_i = -2.260 \times 10^3, K_d = -0.8411
-  $$
+  \end{equation}
 \item % Write the resulting closed-loop function in its numerical form
+  The transfer function of the closed-loop system is the following:
   $$
   \frac{\Theta_b(s)}{V(s)} =
   \frac{-90s^2}{
@@ -360,7 +362,7 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
     + 550.7s^3
     + 3.634 \times 10^4 s^2
     + 1.881 \times 10^5 s
-  }
+  }.
   $$
 \end{enumerate}
 
@@ -456,8 +458,44 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   \end{equation*}
 \end{enumerate}
 \subsection*{Reporting of Task 3.7.1}
-%Plot simulink scheme
-%Plot the realization
+\begin{enumerate}
+\item % Plot your simulink scheme
+  Our Simulink scheme for our linearized system in
+  Eq.~\eqref{eq:system-novel} controlled by Eq.~\eqref{eq:pid} can be seen in Fig.~\ref{fig:simulink-scheme}.
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.7.1linearizedBot-system.pdf}
+    \caption{Simulink scheme for the linearized system, where the
+      f-suffix denote the novel matrices.}
+    \label{fig:simulink-scheme}
+  \end{figure}
+\item % plot realizations of ...
+  Our realizations of $\theta_b(t)$, $x_w(t)$, $v_m(t)$ and $d(t)$ can
+  be seen in Figs.~\ref{fig:lin-theta_b},
+  \ref{fig:lin-x_w},
+  \ref{fig:lin-v_m},
+  \ref{fig:lin-d},
+  respectively.
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.7.1-theta_b.PNG}
+    \caption{The realization of $\theta_b(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
+    \label{fig:lin-theta_b}
+  \end{figure}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.7.1-x_w.PNG}
+    \caption{The realization of $x_w(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
+    \label{fig:lin-x_w}
+  \end{figure}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.7.1-v_m.PNG}
+    \caption{The realization of $v_m(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
+    \label{fig:lin-v_m}
+  \end{figure}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.7.1-d.pdf}
+    \caption{The realization of $d(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
+    \label{fig:lin-d}
+  \end{figure}
+\end{enumerate}
 
 \subsection*{Reporting of Task 3.8.1}
 \begin{enumerate}
@@ -495,71 +533,73 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
 
 \subsection*{Reporting of Task 3.9.1}
 \begin{enumerate}
-\item We find that $\bar{d} = 1.54$ for both the discrete and
+\item % report \bar{d}
+  We found that $\bar{d} = 1.54$ for both the discrete and
   continuous case. We presume this to be the expected results on the
   basis that we use $25\omega_b$ as our sampling rate.
-\end{enumerate}
+\item % plot realizations of cont. and disc.
+  Our realizations for $\theta_b(t)$, $v_m(t)$, $\theta^{lin}_b(t)$
+  and $v^{lin}_m(t)$ where a continuous controller is used can be seen
+  in Figs.~
+  \ref{fig:cont-theta_b},
+  \ref{fig:cont-v_m},
+  \ref{fig:cont-lin-theta_b},
+  \ref{fig:cont-lin-v_m},
+  respectively.
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,out.pdf}
+    \caption{The realization of $\theta_b(t)$ using a continuous controller.}
+    \label{fig:cont-theta_b}
+  \end{figure}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,in.pdf}
+    \caption{The realization of $v_m(t)$ using a continuous controller.}
+    \label{fig:cont-v_m}
+  \end{figure}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,out.pdf}
+    \caption{The realization of $\theta^{lin}_b(t)$ using a continuous
+      controller.}
+    \label{fig:cont-lin-theta_b}
+  \end{figure}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,in.pdf}
+    \caption{The realization of $v^{lin}_m(t)$ using a continuous controller.}
+    \label{fig:cont-lin-v_m}
+  \end{figure}
 
-\item For the Continuous Linear
-  \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-cont,lin,out.pdf}
-      \caption{Continuous Linear $\theta^{lin}_b(t)$}
-      \label{fig:my_label}
+  Our realizations for $\theta_b(k)$, $v_m(k)$, $\theta^{lin}_b(k)$
+  and $v^{lin}_m(k)$ where a discrete controller is used can be seen
+  in Figs.
+  \ref{fig:disc-theta_b},
+  \ref{fig:disc-v_m},
+  \ref{fig:disc-lin-theta_b},
+  \ref{fig:disc-lin-v_m},
+  respectively.
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,out.pdf}
+    \caption{The realization of $\theta_b(k)$ using a continuous controller.}
+    \label{fig:disc-theta_b}
   \end{figure}
-  \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-cont,lin,in.pdf}
-      \caption{Continuous Linear $v^{lin}_m(t)$}
-      \label{fig:my_label}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,in.pdf}
+    \caption{The realization of $v_m(k)$ using a continuous controller.}
+    \label{fig:disc-v_m}
   \end{figure}
-  \newpage
-   For the Continuous non-Linear
-  \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-cont,non-lin,in.pdf}
-      \caption{Continuous non-Linear $\
-      v_m(t)$}
-      \label{fig:my_label}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,out.pdf}
+    \caption{The realization of $\theta^{lin}_b(k)$ using a continuous
+      controller.}
+    \label{fig:disc-lin-theta_b}
   \end{figure}
-   \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-cont,non-lin,out.pdf}
-      \caption{Continuous non-Linear $\
-      \theta_b(t)$}
-      \label{fig:my_label}
+  \begin{figure}
+    \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,in.pdf}
+    \caption{The realization of $v^{lin}_m(k)$ using a continuous controller.}
+    \label{fig:disc-lin-v_m}
   \end{figure}
-  \newpage
-   For the Discrete Linear
-    \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-disc,lin,in.pdf}
-      \caption{Discrete Linear $\
-      v^{lin}_m(t)$}
-      \label{fig:my_label}
-  \end{figure}
-  \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-disc,lin,out.pdf}
-      \caption{Discrete Linear $\
-      \theta^{lin}_b(t)$}
-      \label{fig:my_label}
-  \end{figure}
-   \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-disc,non-lin,in.pdf}
-      \caption{Discrete non-Linear $\
-      V_m(t)$}
-      \label{fig:my_label}
-  \end{figure}
-  \begin{figure}[H]
-      \centering
-      \includegraphics[width=\textwidth]{labA/Images/3.9.1-disc,non-lin,out.pdf}
-      \caption{Discrete non-Linear $\
-      \theta_m(t)$}
-      \label{fig:my_label}
-  \end{figure}
-  \item We did not iterate the PID-Model after simulating, the simulation showed our PID to be sufficient to \emph{stabilize} the system.
+\item % discuss what was understood from these expiremints
+  We did not iterate on the PID parameters during or after simulating
+  because our realizations showed satisfactory results.
 \end{enumerate}
 
 \end{document}
