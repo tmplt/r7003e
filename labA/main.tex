@@ -10,6 +10,7 @@
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
 
 \usepackage{mathtools}
+\usepackage{subcaption}
 
 \title{\Huge R7003E 2017 LP2 \\ Lab A report \\ Group 3}
 \date{\today}
@@ -23,11 +24,11 @@
 \begin{document}
 \maketitle
 
-\begin{instructions}
-	%
-	For this lab report there is no size limit on your report, but try to be concise. As for the check-list, put a \checkmark when you have done the indicated things. Before submitting the report you mush have \checkmark-marked every row. Delete also these instructions and all the footnotes before submitting.
-	%
-\end{instructions}
+% \begin{instructions}
+% 	%
+% 	For this lab report there is no size limit on your report, but try to be concise. As for the check-list, put a \checkmark when you have done the indicated things. Before submitting the report you mush have \checkmark-marked every row. Delete also these instructions and all the footnotes before submitting.
+% 	%
+% \end{instructions}
 
 \section*{Check-list}
 
@@ -35,17 +36,18 @@
 	\rowcolors{1}{black!05!white}{}
 	\begin{tabular}{|m{0.8\columnwidth}>{\centering \arraybackslash}m{0.1\columnwidth}|}
 		\hline
-		the fonts in the figures are the same fonts in the rest of the text\footnote{Suggestion: if you use Matlab then take a look at \texttt{http://staff.www.ltu.se/{\textasciitilde}damvar/matlab.html}. If you instead want to do things seriously in \LaTeX\ then consider using the package \texttt{pgfplots}.} & \\
-		the captions of the figures are self-readable and terminate with a dot & \\
-		the figures are color-blind-people-friendly and do not have useless backgrounds & \\
-		colors are used to convey information\footnote{And not to make figures ``more colored''. E.g., red should be used to indicate something ``wrong'' or ``important'', green something ``correct'', etc.} & \\
-		all the figures that are not photos are in vectorial format & \\
-		the figures have meaningful legends that allow to understand what is what & \\
-		all the acronyms are defined properly\footnote{Suggestion: use the package \texttt{acronym}.} & \\
-		there are no spelling errors & \\
-		what needs to be referenced is referenced & \\
-		the parentheses in the various equations are as big as needed & \\
-		the fonts used in the equations are sufficiently big to be readable comfortably & \\
+		\checkmark the fonts in the figures are the same fonts in the
+          rest of the text & \\%\footnote{Suggestion: if you use Matlab then take a look at \texttt{http://staff.www.ltu.se/{\textasciitilde}damvar/matlab.html}. If you instead want to do things seriously in \LaTeX\ then consider using the package \texttt{pgfplots}.} & \\
+		\checkmark the captions of the figures are self-readable and terminate with a dot & \\
+		\checkmark the figures are color-blind-people-friendly and do not have useless backgrounds & \\
+		\checkmark colors are used to convey information & \\% \footnote{And not to make figures ``more colored''. E.g., red should be used to indicate something ``wrong'' or ``important'', green something ``correct'', etc.} & \\
+		\checkmark all the figures that are not photos are in vectorial format & \\
+		\checkmark the figures have meaningful legends that allow to understand what is what & \\
+		\checkmark all the acronyms are defined properly &\\ % \footnote{Suggestion: use the package \texttt{acronym}.} & \\
+		\checkmark there are no spelling errors & \\
+		\checkmark what needs to be referenced is referenced & \\
+		\checkmark the parentheses in the various equations are as big as needed & \\
+		\checkmark the fonts used in the equations are sufficiently big to be readable comfortably & \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -53,11 +55,11 @@
 
 \begin{acronym}[TDMA]
 	\acro{EOM}	[EOM]	{Equations of Motion}
-	\acro{DC}	[DC]	{Direct Current}
-	\acro{SS}	[SS]	{State-Space}
+	% \acro{DC}	[DC]	{Direct Current}
+	% \acro{SS}	[SS]	{State-Space}
 	\acro{PID}	[PID]	{Proportional Integrative Derivative}
-	\acro{LQR}	[LQR]	{Linear-Quadratic Regulator}
-	\acro{emf}	[emf]	{electromotive force}
+	% \acro{LQR}	[LQR]	{Linear-Quadratic Regulator}
+	% \acro{emf}	[emf]	{electromotive force}
 \end{acronym}
 % basic usage: \ac{EOM} \acf{EOM} \acl{EOM}
 
@@ -349,7 +351,7 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   inspecting the system response via \texttt{impulse(feedback(plant, controller))}.
   Additionally, our poles as real-valued because we do not want an oscillatory system response.
 \item % Write the values of the parameters of the PID
-  Our found PID values are found to be
+  Our found \ac{PID} values are found to be
   \begin{equation}\label{eq:pid}
   K_p = -404.3247, K_i = -2.260 \times 10^3, K_d = -0.8411
   \end{equation}
@@ -476,24 +478,17 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   \ref{fig:lin-d},
   respectively.
   \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.7.1-theta_b.PNG}
-    \caption{The realization of $\theta_b(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
-    \label{fig:lin-theta_b}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.7.1-x_w.PNG}
-    \caption{The realization of $x_w(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
-    \label{fig:lin-x_w}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.7.1-v_m.PNG}
-    \caption{The realization of $v_m(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
-    \label{fig:lin-v_m}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.7.1-d.pdf}
-    \caption{The realization of $d(t)$ for the system in Fig.~\ref{fig:simulink-scheme}.}
-    \label{fig:lin-d}
+    \centering
+    \begin{tabular}{cc}
+        \subcaptionbox{Realization of $\theta_b(t)$.\label{fig:lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/3.7.1-theta_b.pdf}}&
+        \subcaptionbox{Realization of $x_w(t)$.\label{fig:lin-x_w}}{\includegraphics[width=0.5\linewidth]{Images/3.7.1-x_w.pdf}}
+      &
+        \subcaptionbox{Realization of $v_m(t)$.\label{fig:lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/3.7.1-v_m.pdf}}
+      &
+        \subcaptionbox{Realization of $d(t)$.\label{fig:lin-d}}{\includegraphics[width=0.5\linewidth]{Images/3.7.1-d.pdf}}
+      \\
+    \end{tabular}
+    \caption{Realizations of the system in Fig.~\ref{fig:simulink-scheme}.}
   \end{figure}
 \end{enumerate}
 
@@ -547,26 +542,40 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   \ref{fig:cont-lin-v_m},
   respectively.
   \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,out.pdf}
-    \caption{The realization of $\theta_b(t)$ using a continuous controller.}
-    \label{fig:cont-theta_b}
+    \centering
+    \begin{tabular}{cc}
+        \subcaptionbox{Realization of $\theta_b(t)$.\label{fig:cont-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}&
+        \subcaptionbox{Realization of $v_m(t)$.\label{fig:cont-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+      &
+        \subcaptionbox{Realization of $\theta^{lin}_b(t)$.\label{fig:cont-lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}
+      &
+        \subcaptionbox{Realization of $v^{lin}_m(t)$.\label{fig:cont-lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+      \\
+    \end{tabular}
+    \caption{Realizations using a continuous controller.}
   \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,in.pdf}
-    \caption{The realization of $v_m(t)$ using a continuous controller.}
-    \label{fig:cont-v_m}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,out.pdf}
-    \caption{The realization of $\theta^{lin}_b(t)$ using a continuous
-      controller.}
-    \label{fig:cont-lin-theta_b}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,in.pdf}
-    \caption{The realization of $v^{lin}_m(t)$ using a continuous controller.}
-    \label{fig:cont-lin-v_m}
-  \end{figure}
+
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,out.pdf}
+  %   \caption{The realization of $\theta_b(t)$ using a continuous controller.}
+  %   \label{fig:cont-theta_b}
+  % \end{figure}
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,in.pdf}
+  %   \caption{The realization of $v_m(t)$ using a continuous controller.}
+  %   \label{fig:cont-v_m}
+  % \end{figure}
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,out.pdf}
+  %   \caption{The realization of $\theta^{lin}_b(t)$ using a continuous
+  %     controller.}
+  %   \label{fig:cont-lin-theta_b}
+  % \end{figure}
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,in.pdf}
+  %   \caption{The realization of $v^{lin}_m(t)$ using a continuous controller.}
+  %   \label{fig:cont-lin-v_m}
+  % \end{figure}
 
   Our realizations for $\theta_b(k)$, $v_m(k)$, $\theta^{lin}_b(k)$
   and $v^{lin}_m(k)$ where a discrete controller is used can be seen
@@ -576,29 +585,43 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   \ref{fig:disc-lin-theta_b},
   \ref{fig:disc-lin-v_m},
   respectively.
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,out.pdf}
-    \caption{The realization of $\theta_b(k)$ using a continuous controller.}
-    \label{fig:disc-theta_b}
+    \begin{figure}
+    \centering
+    \begin{tabular}{cc}
+        \subcaptionbox{Realization of $\theta_b(k)$.\label{fig:disc-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}&
+        \subcaptionbox{Realization of $v_m(k)$.\label{fig:disc-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+      &
+        \subcaptionbox{Realization of $\theta^{lin}_b(k)$.\label{fig:disc-lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}
+      &
+        \subcaptionbox{Realization of $v^{lin}_m(k)$.\label{fig:disc-lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+      \\
+    \end{tabular}
+    \caption{Realizations using a discrete controller.}
   \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,in.pdf}
-    \caption{The realization of $v_m(k)$ using a continuous controller.}
-    \label{fig:disc-v_m}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,out.pdf}
-    \caption{The realization of $\theta^{lin}_b(k)$ using a continuous
-      controller.}
-    \label{fig:disc-lin-theta_b}
-  \end{figure}
-  \begin{figure}
-    \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,in.pdf}
-    \caption{The realization of $v^{lin}_m(k)$ using a continuous controller.}
-    \label{fig:disc-lin-v_m}
-  \end{figure}
+
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,out.pdf}
+  %   \caption{The realization of $\theta_b(k)$ using a continuous controller.}
+  %   \label{fig:disc-theta_b}
+  % \end{figure}
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,in.pdf}
+  %   \caption{The realization of $v_m(k)$ using a continuous controller.}
+  %   \label{fig:disc-v_m}
+  % \end{figure}
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,out.pdf}
+  %   \caption{The realization of $\theta^{lin}_b(k)$ using a continuous
+  %     controller.}
+  %   \label{fig:disc-lin-theta_b}
+  % \end{figure}
+  % \begin{figure}
+  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,in.pdf}
+  %   \caption{The realization of $v^{lin}_m(k)$ using a continuous controller.}
+  %   \label{fig:disc-lin-v_m}
+  % \end{figure}
 \item % discuss what was understood from these expiremints
-  We did not iterate on the PID parameters during or after simulating
+  We did not iterate on the \ac{PID} parameters during or after simulating
   because our realizations showed satisfactory results.
 \end{enumerate}
 
