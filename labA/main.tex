@@ -144,7 +144,7 @@ We substitute Eqs.~\eqref{eq:F_xyt}--\eqref{eq:T_f}, \eqref{eq:motor} into Eq.~\
       + \frac{K_t}{R_m}v_m
       - m_b l_b l_w \ddot{\theta}_b \cos\theta_b
       - m_b l_b l_w \dot{\theta}_b^2 \sin\theta_b
-    \end{aligned}\\
+    \end{aligned}\\[2.5em]
     \begin{aligned}
       \ddot{\theta}_b\left(I_b + m_b l_b^2\right)
       =
@@ -201,7 +201,7 @@ We substitute Eqs.~\eqref{eq:F_xyt}--\eqref{eq:T_f}, \eqref{eq:motor} into Eq.~\
         \\
         + \frac{K_t}{R_m}v_m
         - m_b l_b l_w \ddot{\theta}_b
-      \end{aligned}\\
+      \end{aligned}\\[2.5em]
       \begin{aligned}
         \ddot{\theta}_b\left(I_b + m_b l_b^2\right)
         =
@@ -296,31 +296,33 @@ We substitute Eqs.~\eqref{eq:F_xyt}--\eqref{eq:T_f}, \eqref{eq:motor} into Eq.~\
 \item % Write the matrices A, B, C, and D in (12) parametric numeric form (for this purpose use Table 4 on page 64).
   Our system in numeric system-state form is the following:
   \begin{equation}\label{eq:numeric-ss}
-    \begin{bmatrix}
-      0.0091 & 0.0009 \\
-      0.0427 & 0.0109
-    \end{bmatrix}
-    \begin{bmatrix}
-      \ddot{x}_w \\
-      \ddot{\theta}_b
-    \end{bmatrix}
-    =
-    \begin{bmatrix}
-      0 & -2.2584 & 0 & 0.0474 \\
-      0 & 2.2584 & 0.4182 & -0.0474
-    \end{bmatrix}
-    \begin{bmatrix}
-      x_w\\
-      \dot{x}_w\\
-      \theta_b\\
-      \dot{\theta}_b
-    \end{bmatrix}
-    +
-    \begin{bmatrix}
-      0.1068 \\
-      -0.1068
-    \end{bmatrix}
-    u
+    \begin{aligned}
+      \begin{bmatrix}
+        0.0091 & 0.0009 \\
+        0.0427 & 0.0109
+      \end{bmatrix}
+      \begin{bmatrix}
+        \ddot{x}_w \\
+        \ddot{\theta}_b
+      \end{bmatrix}
+      =
+      \begin{bmatrix}
+        0 & -2.2584 & 0 & 0.0474 \\
+        0 & 2.2584 & 0.4182 & -0.0474
+      \end{bmatrix}
+      \begin{bmatrix}
+        x_w\\
+        \dot{x}_w\\
+        \theta_b\\
+        \dot{\theta}_b
+      \end{bmatrix}\\
+      +
+      \begin{bmatrix}
+        0.1068 \\
+        -0.1068
+      \end{bmatrix}
+      u
+    \end{aligned}
   \end{equation}
 \end{enumerate}
 
@@ -333,11 +335,12 @@ We find ous transfer function to be
 \end{equation}
 
 \item % Describe any numeric MATLAB problems encountered, if any
-The output of \texttt{ss2zp(A, B, C, D)} yields a zero-vector with the
-values of $10^{-13}\begin{bmatrix} 0 & 0.5684 \end{bmatrix}^T$. We here decide that the non-zero
-value is sufficiently close to zero to be presumed as such. With two
-zeroes and one pole at $s = 0$ we have a pole/zero cancelation that
-simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
+  The output of \texttt{ss2zp(A, B, C, D)} yields a zero-vector with
+  the values of $$z = 10^{-13}\begin{bmatrix} 0 & 0.5684 \end{bmatrix}^T.$$
+  We here decide that the non-zero value is sufficiently close to zero
+  to be presumed as such. With two zeroes and one pole at $s = 0$ we
+  have a pole/zero cancelation that simplifies our transfer function
+  to the one in Eq.~\eqref{eq:tf}.
 \end{enumerate}
 
 \subsection*{Reporting of Task 3.5.1}
@@ -400,7 +403,7 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
         - m_b l_b l_w \ddot{\theta}_b \cos\theta_b
         - m_b l_b l_w \dot{\theta}_b^2 \sin\theta_b
         + l_w d
-      \end{aligned}\\
+      \end{aligned}\\[2.5em]
       \begin{aligned}
         \ddot{\theta}_b\left(I_b + m_b l_b^2\right)
         =
@@ -544,38 +547,16 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
   \begin{figure}
     \centering
     \begin{tabular}{cc}
-        \subcaptionbox{Realization of $\theta_b(t)$.\label{fig:cont-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}&
-        \subcaptionbox{Realization of $v_m(t)$.\label{fig:cont-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+        \subcaptionbox{Realization of $\theta_b(t)$.\label{fig:cont-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-theta_b-cont-nonlin.pdf}}&
+        \subcaptionbox{Realization of $v_m(t)$.\label{fig:cont-v_m}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-v_m-cont-nonlin.pdf}}
       &
-        \subcaptionbox{Realization of $\theta^{lin}_b(t)$.\label{fig:cont-lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}
+        \subcaptionbox{Realization of $\theta^{lin}_b(t)$.\label{fig:cont-lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-theta_b-cont-lin.pdf}}
       &
-        \subcaptionbox{Realization of $v^{lin}_m(t)$.\label{fig:cont-lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+        \subcaptionbox{Realization of $v^{lin}_m(t)$.\label{fig:cont-lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-v_m-cont-lin.pdf}}
       \\
     \end{tabular}
     \caption{Realizations using a continuous controller.}
   \end{figure}
-
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,out.pdf}
-  %   \caption{The realization of $\theta_b(t)$ using a continuous controller.}
-  %   \label{fig:cont-theta_b}
-  % \end{figure}
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,non-lin,in.pdf}
-  %   \caption{The realization of $v_m(t)$ using a continuous controller.}
-  %   \label{fig:cont-v_m}
-  % \end{figure}
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,out.pdf}
-  %   \caption{The realization of $\theta^{lin}_b(t)$ using a continuous
-  %     controller.}
-  %   \label{fig:cont-lin-theta_b}
-  % \end{figure}
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-cont,lin,in.pdf}
-  %   \caption{The realization of $v^{lin}_m(t)$ using a continuous controller.}
-  %   \label{fig:cont-lin-v_m}
-  % \end{figure}
 
   Our realizations for $\theta_b(k)$, $v_m(k)$, $\theta^{lin}_b(k)$
   and $v^{lin}_m(k)$ where a discrete controller is used can be seen
@@ -588,38 +569,16 @@ simplifies our transfer function to the one in Eq.~\eqref{eq:tf}.
     \begin{figure}
     \centering
     \begin{tabular}{cc}
-        \subcaptionbox{Realization of $\theta_b(k)$.\label{fig:disc-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}&
-        \subcaptionbox{Realization of $v_m(k)$.\label{fig:disc-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+        \subcaptionbox{Realization of $\theta_b(k)$.\label{fig:disc-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-theta_b-disc-nonlin.pdf}}&
+        \subcaptionbox{Realization of $v_m(k)$.\label{fig:disc-v_m}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-v_m-disc-nonlin.pdf}}
       &
-        \subcaptionbox{Realization of $\theta^{lin}_b(k)$.\label{fig:disc-lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/}}
+        \subcaptionbox{Realization of $\theta^{lin}_b(k)$.\label{fig:disc-lin-theta_b}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-theta_b-disc-lin.pdf}}
       &
-        \subcaptionbox{Realization of $v^{lin}_m(k)$.\label{fig:disc-lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/}}
+        \subcaptionbox{Realization of $v^{lin}_m(k)$.\label{fig:disc-lin-v_m}}{\includegraphics[width=0.5\linewidth]{Images/3.9.1-v_m-disc-lin.pdf}}
       \\
     \end{tabular}
     \caption{Realizations using a discrete controller.}
   \end{figure}
-
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,out.pdf}
-  %   \caption{The realization of $\theta_b(k)$ using a continuous controller.}
-  %   \label{fig:disc-theta_b}
-  % \end{figure}
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,non-lin,in.pdf}
-  %   \caption{The realization of $v_m(k)$ using a continuous controller.}
-  %   \label{fig:disc-v_m}
-  % \end{figure}
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,out.pdf}
-  %   \caption{The realization of $\theta^{lin}_b(k)$ using a continuous
-  %     controller.}
-  %   \label{fig:disc-lin-theta_b}
-  % \end{figure}
-  % \begin{figure}
-  %   \includegraphics[width=\linewidth]{Images/3.9.1-disc,lin,in.pdf}
-  %   \caption{The realization of $v^{lin}_m(k)$ using a continuous controller.}
-  %   \label{fig:disc-lin-v_m}
-  % \end{figure}
 \item % discuss what was understood from these expiremints
   We did not iterate on the \ac{PID} parameters during or after simulating
   because our realizations showed satisfactory results.
