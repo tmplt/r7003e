@@ -116,11 +116,11 @@ controllerd = c2d(pid(Kp, Ki, Kd, T), T, 'zoh');
 %Get the obervabilty matrix
 ob = obsv(A, C)
 
-%Check the range of ob matrix  
-range(ob)
+%Check the rank of ob matrix  
+rank(ob)
 
 %Get controlability matrix
 co = ctrb(A, B)
 
-%Check the range of co matrix
-range(co)
+%Check the rank of co matrix
+rank(co)
