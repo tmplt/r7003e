@@ -1,0 +1,68 @@
+\documentclass[11pt]{article} % ~~~~~~~~~~~~~~~~~~~~~~~ %
+%														%
+\input{./Scripts/packages}								%
+\input{./Scripts/ridefinitions}							%
+\input{./Scripts/figuresgraphicalsettings}				%
+\input{./Scripts/tablesgraphicalsettings}				%
+\input{./Scripts/newcommands}							%
+\input{./Scripts/colors}								%
+%														%
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ %
+
+\usepackage{mathtools}
+\usepackage{subcaption}
+
+\title{\Huge R7003E 2017 LP2 \\ Lab B report \\ Group 3}
+\date{\today}
+\author{                        % In alphabetical order, family name first
+  Andersson Tommy \\
+  Graden Samuel \\
+  Sonesten Viktor
+}
+
+
+\begin{documen}
+\maketitle
+
+% \begin{instructions}
+% 	%
+% 	For this lab report there is no size limit on your report, but try to be concise. As for the check-list, put a \checkmark when you have done the indicated things. Before submitting the report you mush have \checkmark-marked every row. Delete also these instructions and all the footnotes before submitting.
+% 	%
+% \end{instructions}
+
+\section*{Check-list}
+
+\begin{center}
+	\rowcolors{1}{black!05!white}{}
+	\begin{tabular}{|m{0.8\columnwidth}>{\centering \arraybackslash}m{0.1\columnwidth}|}
+		\hline
+		\checkmark the fonts in the figures are the same fonts in the
+          rest of the text & \\%\footnote{Suggestion: if you use Matlab then take a look at \texttt{http://staff.www.ltu.se/{\textasciitilde}damvar/matlab.html}. If you instead want to do things seriously in \LaTeX\ then consider using the package \texttt{pgfplots}.} & \\
+		\checkmark the captions of the figures are self-readable and terminate with a dot & \\
+		\checkmark the figures are color-blind-people-friendly and do not have useless backgrounds & \\
+		\checkmark colors are used to convey information & \\% \footnote{And not to make figures ``more colored''. E.g., red should be used to indicate something ``wrong'' or ``important'', green something ``correct'', etc.} & \\
+		\checkmark all the figures that are not photos are in vectorial format & \\
+		\checkmark the figures have meaningful legends that allow to understand what is what & \\
+		\checkmark all the acronyms are defined properly &\\ % \footnote{Suggestion: use the package \texttt{acronym}.} & \\
+		\checkmark there are no spelling errors & \\
+		\checkmark what needs to be referenced is referenced & \\
+		\checkmark the parentheses in the various equations are as big as needed & \\
+		\checkmark the fonts used in the equations are sufficiently big to be readable comfortably & \\
+		\hline
+	\end{tabular}
+\end{center}
+
+
+\begin{acronym}[TDMA]
+	\acro{EOM}	[EOM]	{Equations of Motion}
+	% \acro{DC}	[DC]	{Direct Current}
+	% \acro{SS}	[SS]	{State-Space}
+	\acro{PID}	[PID]	{Proportional Integrative Derivative}
+	% \acro{LQR}	[LQR]	{Linear-Quadratic Regulator}
+	% \acro{emf}	[emf]	{electromotive force}
+\end{acronym}
+% basic usage: \ac{EOM} \acf{EOM} \acl{EOM}
+
+\subsection*{Reporting of Task 4.4.1}
+
+\end{document}
