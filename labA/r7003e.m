@@ -112,3 +112,15 @@ T = 1 / sampling_freq;
 
 % We compute the discrete controller
 controllerd = c2d(pid(Kp, Ki, Kd, T), T, 'zoh');
+
+%Get the obervabilty matrix
+ob = obsv(A, C)
+
+%Check the rank of ob matrix  
+rank(ob)
+
+%Get controlability matrix
+co = ctrb(A, B)
+
+%Check the rank of co matrix
+rank(co)
