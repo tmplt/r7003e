@@ -113,14 +113,16 @@ T = 1 / sampling_freq;
 % We compute the discrete controller
 controllerd = c2d(pid(Kp, Ki, Kd, T), T, 'zoh');
 
-%Get the obervabilty matrix
-ob = obsv(A, C)
+%% Task 4.5.1 Compute controllability/observability of lin. system
 
-%Check the rank of ob matrix  
+%Get the obervabilty matrix
+ob = obsv(A, C);
+
+%Check the rank of ob matrix
 rank(ob)
 
 %Get controlability matrix
-co = ctrb(A, B)
+co = ctrb(A, B);
 
 %Check the rank of co matrix
 rank(co)
