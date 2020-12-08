@@ -126,3 +126,72 @@ co = ctrb(A, B);
 
 %Check the rank of co matrix
 rank(co)
+
+%% Task 4.6.1 Design a SS controller selecting the poles using a second order approxi-mation
+pc = [ -475.0690; -5.6571; -5.7195; -70];
+%Ackermann K
+K = acker(A, B, pc)
+
+%% LQR
+rho = 1;
+C = [400,1,50,1];
+Q = rho*transpose(C)*C
+R = 1;
+
+%LQR K
+K = lqr(A, B, Q, R)
+
+%% Task 4.8.1 
+ M1 = 1.0e+03 * [
+    -0.4358   -0.0072    0.0091
+    -0.0011   -0.0340    0.0010
+     1.8717   -0.0165   -0.0400
+]
+ 
+ M2 = [
+    20.6000
+          0
+   -90.0000
+ ]
+ 
+ M3 = [
+     0
+      0
+      0
+ ]
+ 
+ M4 = [
+     1.1459
+    33.9942
+    78.4584
+ ]
+ 
+ M5 = [
+    0.7598
+    1.1459
+    31.6987
+ ]
+ 
+ M6 = [
+      1
+      0
+      0
+      0
+ ]
+ 
+ M7 = [
+      0     0     0
+      1     0     0
+      0     1     0
+      0     0     1
+ ]
+ 
+ L = [
+    15.0196    0.5900
+    -2.7287   18.9345
+     0.6038   44.9804
+    22.1715  435.4379
+ ];
+
+CStateWeights = [1, 0, 0, 0;
+                0, 0, 1, 0]; 
