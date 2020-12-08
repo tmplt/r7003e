@@ -498,33 +498,28 @@ We find ous transfer function to be
 \subsection*{Reporting of Task 3.8.1}
 \begin{enumerate}
 \item We find the bandwidth of our system via \texttt{gh = plant *
-    controller; bandwidth(gh / (1 + gh))} to be
-  $\omega_b = 69.8340~\text{rad/s} = 11.1144~\text{Hz}$.
+    controller; bandwidth(gh) + bandwidth(1 + gh))} to be
+  $\omega_b = 11.4503~\text{rad/s} = 1.8224~\text{Hz}$.
 \item We choose our samping time to be
-  $25\omega_b \Rightarrow T = 0.0036~\text{s}$.
+  $25\omega_b \Rightarrow T = 0.0219~\text{s}$.
 \item Following the recommendations of §8.3.6, we use a scalar value
   of $25$ so that we may ``[use] discrete equivalents [...] with
   confidence''.
 \item
-  Our discrete controller, $C(z)$, derived via \texttt{c2d(pid(Kp, Ki,
-    Kd, T), T, ’zoh’)}\footnote{We have no idea what value of
-    \texttt{Tf} we should pass to \texttt{c2d}, but we assume it has
-    some relation to $T$.} is
+  Our discrete controller, $C(z)$ is
   \begin{equation}
     C(z) =
     K_p
-    + K_i\frac{T_s}{z - 1}
-    + K_d\left(
-      T_f + \frac{T_s}{z - 1}
-    \right)^{-1}
+    + K_i T_s\frac{z}{z - 1}
+    + K_d N \frac{1}{1 + N T_s \frac{z}{z-1}}
     \text{, where}
     \quad
     \begin{cases}
       K_p = -404 \\
       K_i = -2.26 \times 10^{3} \\
       K_d = -1.33 \\
-      T_f = 0.00569 \\
-      T_s = T
+      T_s = T \\
+      N = 100
     \end{cases}
   \end{equation}
 \end{enumerate}
