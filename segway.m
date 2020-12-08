@@ -92,7 +92,7 @@ Bf = [ 0 0; B(2) push(1); 0 0; B(4) push(2) ];
 
 %% Task 3.8 Convert the controller to the discrete domain
 % Find the bandwidth of the system.
-sys_bw = bandwidth((controller*plant) / (1 + controller * plant));
+sys_bw = bandwidth(controller*plant) + bandwidth(1 + controller * plant);
 
 % NOTE: the below assumes the while feedback system as the controller,
 % which is probably incorrect.
