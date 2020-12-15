@@ -135,7 +135,7 @@ K = acker(A, B, pc);
 
 %% LQR
 rho = 1;
-C = [400,1,50,1];
+C = [25,1,15,1];
 Q = rho*transpose(C)*C;
 R = 1;
 
@@ -171,9 +171,6 @@ T_4 = [0, 0, 0, 1];
 V = [T_3;
      C_nacc;
      T_4];
-      
- 
-%C_squigly = C*T 
  
 T_inv = [C_acc;
          V];
@@ -209,17 +206,12 @@ pe_reduced = [-25,-12,-10];
 % pe_reduced = [-1500,-1501, -1503];
 %pe_reduced = [ -25, -12.5 + 10i, -12.5 - 10i ]; % antons
 
-% PROBABLY WRONG
-%DD = CC';
-%DD = DD(:, 1:2);
-% PROBABLY WRONG
-
 L_red = (place(AA', CC', pe_reduced))';
 
 L_acc = L_red(1:end, 1);%L_red(1:end,1:1)
 L_nacc = L_red(1:end, 2); %(1:end,2:2)
+
 M1 = A_squigly_xx - L_acc*A_squigly_yx-L_nacc*C_squigly_x;
-%M_1 = A_squigly_xx -L_nacc*C_squigly_x;
 M2 = B_squigly_x-L_acc*B_squigly_y;
 M3 = A_squigly_xy-L_acc*A_squigly_yy-L_nacc*C_squigly_y;
 M4 = L_nacc;
@@ -230,3 +222,54 @@ M7 = T(1:end, 2:end);
 kP = Kp;
 kI = Ki;
 kD = Kd;
+
+%% 4.9.1
+
+fSamplingPeriod = 1 / sampling_freq;
+fSamplingPeriod = 0.005;
+
+sysd = c2d(ss(A,B,C,0), fSamplingPeriod)
+
+[Ad, Bd, Cd, Dd] = ssdata(sysd)
+
+Kd = lqrd(A, B, Q, R,fSamplingPeriod);
+
+Ld = (place(Ad', Cd', exp(pe*fSamplingPeriod)))';
+
+Cd_acc = [1 0 0 0];
+Cd_nacc = [0 0 1 0];
+
+Ad_squigly = T_inv*Ad*T;
+Bd_squigly = T_inv*Bd;
+Bd_squigly_x = Bd_squigly(2:end); %B_squigly(1:2);
+Bd_squigly_y = Bd_squigly(1); %B_squigly(3:4);
+Cd_squigly_acc = Cd_acc*T;
+Cd_squigly_nacc = Cd_nacc*T;
+
+Ad_squigly_xx = Ad_squigly(2:end, 2:end);
+Ad_squigly_yx = Ad_squigly(1, 2:4);
+Ad_squigly_xy = Ad_squigly(2:4, 1);
+Ad_squigly_yy = Ad_squigly(1, 1);
+
+Cd_squigly_y = Cd_squigly_nacc(1);
+Cd_squigly_x = Cd_squigly_nacc(2:end);
+
+AAd = Ad_squigly_xx;
+CCd = [Ad_squigly_yx;
+      Cd_squigly_x];
+
+pe_reduced = [-25,-12,-10];  
+% pe_reduced = [-1500,-1501, -1503];
+%pe_reduced = [ -25, -12.5 + 10i, -12.5 - 10i ]; % antons
+
+L_red = (place(AAd', CCd', exp(pe_reduced*fSamplingPeriod)))';
+
+Ld_acc = L_red(1:end, 1);%L_red(1:end,1:1)
+Ld_nacc = L_red(1:end, 2); %(1:end,2:2)
+Md1 = Ad_squigly_xx - Ld_acc*Ad_squigly_yx-Ld_nacc*Cd_squigly_x;
+Md2 = Bd_squigly_x-L_acc*Bd_squigly_y;
+Md3 = Ad_squigly_xy-Ld_acc*Ad_squigly_yy-Ld_nacc*Cd_squigly_y;
+Md4 = Ld_nacc;
+Md5 = Ld_acc;
+Md6 = T(1:end, 1:1);
+Md7 = T(1:end, 2:end);
